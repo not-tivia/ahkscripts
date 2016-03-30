@@ -1,0 +1,13 @@
+Numpad1::
+While GetKeyState("Numpad1", "D")
+{
+Click
+RandomSleep(400,700)
+}
+return
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
