@@ -1,0 +1,136 @@
+;Only Works with Osbuddy in the default screen position
+;Numpad1 Clicks
+;Numpad0 Returns to tinderbox(top left inventory spot)
+;Numpad2 Moves mouse to next log position
+
+#NoEnv
+CoordMode, Mouse ; Required: change coord mode to screen vs relative.
+
+Numpad0::
+
+offset0000=1
+offsetX0000 := 854+Ran(offset0000),314+Ran(offset0000) 
+offsetY0000 := 314+Ran(offset0000), 854+Ran(offset0000) 
+MoveMouse(offsetX0000, offsetY0000, 100)
+Click, %offsetX000%, %offsetY000%
+RandomSleep(65,200)
+return
+
+
+Numpad1::
+Click
+return
+
+Numpad2::
+KeyCount += 1
+If(KeyCount == 1){
+Mousemove,0, 35, 0, R
+
+}
+If(KeyCount == 2){
+Mousemove,0, 70, 0, R
+
+}
+If(KeyCount == 3){
+Mousemove,0, 105, 0, R
+}
+
+
+If(KeyCount == 4){
+Mousemove,0,140, 0, R
+}
+
+
+If(KeyCount == 5){
+Mousemove,0,175, 0, R
+}
+
+
+If(KeyCount == 6){
+Mousemove,0,210, 0, R
+
+}
+
+
+If(KeyCount == 7){
+Mousemove,33, -4, 0,R
+}
+
+
+If(KeyCount == 8){
+Mousemove,33, -4, 0,R
+}
+
+
+If(KeyCount == 9){
+Mousemove,0, 70, 0, R
+}
+If(KeyCount == 10){
+Mousemove,33, -4, 0,R
+}
+
+If(KeyCount == 11){
+Mousemove,0, 105, 0, R
+}
+If(KeyCount == 12){
+Mousemove,33, -4, 0,R
+}
+
+If(KeyCount == 13){
+Mousemove,0,140, 0, R
+}
+
+If(KeyCount == 14){
+Mousemove,33, -4, 0,R
+}
+
+If(KeyCount == 15){
+Mousemove,0,175, 0, R
+}
+
+If(KeyCount == 16){
+Mousemove,33, -4, 0,R
+}
+
+If(KeyCount == 17){
+Mousemove,0,210, 0, R
+}
+return
+
+Numpad3::
+Mousemove,33, -4, 0,R
+return
+
+NumpadEnter::
+KeyCount *=0
+return
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+
+
+MoveMouse(X, Y, Speed=0) {
+   T := A_MouseDelay
+   SetMouseDelay, -1
+   MouseGetPos, CX, CY
+   Pts := Round(Sqrt((X - CX)**2 + (Y - CY)**2) / [color=red]30[/color],0)
+   Loop %Pts% {
+      Random, NX, % CX - ((CX - X) / Pts) * (A_Index - 1)
+                , % CX - ((CX - X) / Pts) * A_Index
+      Random, NY, % CY - ((CY - Y) / Pts) * (A_Index - 1)
+                , % CY - ((CY - Y) / Pts) * A_Index
+      MouseMove, % NX, % NY, % Speed
+   }
+   MouseMove, % X, % Y, % Speed
+   SetMouseDelay, % T
+}
