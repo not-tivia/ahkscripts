@@ -1,0 +1,8 @@
+Numpad1::Click
+return
+Numpad2::Mousemove,0,35,0,R
+return
+Numpad3::Click
+return
+Numpad4::Mousemove,0,55,0,R
+return
