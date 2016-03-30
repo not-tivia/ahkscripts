@@ -1,0 +1,82 @@
+
+;Numkey 0 Starts Loop
+;Numkey 2 gets first click position and second click position each time you press it
+;Numkey enter resets the mousepos's
+;ScrollLk button pauses entire ahk script
+
+
+#NoEnv
+CoordMode, Mouse ; Required: change coord mode to screen vs relative.
+
+
+Numpad0::
+Loop
+{ 
+offset=3
+offsetX := StartX+Ran(offset), StartY+Ran(offset) 
+offsetY := StartY+Ran(offset), StartX+Ran(offset) 
+Click, %offsetX%, %offsetY%
+RandomSleep(450,1700)
+offset2=2
+offsetX2 := StartX2+Ran(offset2), StartY2+Ran(offset2) 
+offsetY2 := StartY2+Ran(offset2), StartX2+Ran(offset2) 
+MoveMouse(StartX2, StartY2, Speed=100)
+Click, %offsetX2%, %offsetY2%
+RandomSleep(432,817)
+MoveMouse(StartX, StartY, Speed=100)
+RandomSleep(450,700)
+
+}
+return
+
+
+Numpad2::
+KeyCount += 1
+If(KeyCount == 1){
+MouseGetPos, StartX, StartY
+}
+
+If(KeyCount == 2){
+MouseGetPos, StartX2, StartY2
+}
+return
+
+
+NumpadEnter::
+KeyCount *=0
+return
+
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+
+MoveMouse(X, Y, Speed=0) {
+   T := A_MouseDelay
+   SetMouseDelay, -1
+   MouseGetPos, CX, CY
+   Pts := Round(Sqrt((X - CX)**2 + (Y - CY)**2) / [color=red]30[/color],0)
+   Loop %Pts% {
+      Random, NX, % CX - ((CX - X) / Pts) * (A_Index - 1)
+                , % CX - ((CX - X) / Pts) * A_Index
+      Random, NY, % CY - ((CY - Y) / Pts) * (A_Index - 1)
+                , % CY - ((CY - Y) / Pts) * A_Index
+      MouseMove, % NX, % NY, % Speed
+   }
+   MouseMove, % X, % Y, % Speed
+   SetMouseDelay, % T
+}
+
+Scrolllock::
+Pause
+Suspend
+Return
