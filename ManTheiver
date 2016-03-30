@@ -1,0 +1,16 @@
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+
+Numpad1::
+Click right
+RandomSleep(200,450)
+Mousemove,0,55,0,R
+RandomSleep(200,450)
+Click
+RandomSleep(200,450)
+Mousemove,0,-55,0,R
+return
