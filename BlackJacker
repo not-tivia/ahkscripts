@@ -1,0 +1,58 @@
+Numpad1::
+While GetKeyState("Numpad1", "D")
+{
+Click Right
+RandomSleep(300,800)
+}
+return
+
+Numpad2::
+While GetKeyState("Numpad2", "D")
+{
+Mousemove,0,75,0,R
+RandomSleep(600,1000)
+}
+return
+
+Numpad3::
+While GetKeyState("Numpad3", "D")
+{
+Click
+RandomSleep(300,700)
+}
+return
+
+
+Numpad4::Click Right
+return
+
+Numpad5::
+While GetKeyState("Numpad5", "D")
+{
+Mousemove,0,40,0,R
+RandomSleep(300,700)
+}
+return
+
+Numpad6::Click 
+return
+
+NumpadEnter::
+Mousemove,0,-75,0,R
+RandomSleep(100,400)
+return
+
+NumpadAdd::
+While GetKeyState("NumpadAdd", "D")
+{
+Mousemove,0,-40,0,R
+RandomSleep(100,400)
+}
+return
+
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
