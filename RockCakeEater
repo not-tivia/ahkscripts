@@ -1,0 +1,13 @@
+
+;if rockcake is at bottom of inventory = and - will 1:1 spam eat rockcake
+=::Click right
+-::Click
+
+C::
+Click right
+MouseMove, 0, 35, 1, R
+Click
+MouseMove, 0, -35, 1, R
+return
+
+ESC::ExitApp
