@@ -1,12 +1,18 @@
-z:: ;withdraw from bank
+z:: ;withdraw X amount from bank/deposit x amount from inventory
 Click right
 MouseMove, 0, 75, 1, R
 Click
 return
 
+=:: ;hover mouse over banker and click to open up bank
+Click right
+MouseMove, 0, 35, 1, R
+Click
+return
 
-XButton1::  ; Charging Orbs
-randomnumber := RandomNumb(27, 99)
+
+z::  ; Charging Orbs/Fletching picks a number between 29-99
+randomnumber := RandomNumb(28, 99)
 Click right
 RandomSleep(150,350)
 MouseMove, 0, 75, 1, R
@@ -19,9 +25,8 @@ Send, {Enter Down}
 Send, {Enter Up}
 return
 
-
-~::  ; Cooking
-randomnumber := RandomNumb(27, 99)
+~::  ; Cooking, hover over food interface and press hotkey and cooks numeber between 28-99
+randomnumber := RandomNumb(28, 99)
 Click right
 RandomSleep(150,350)
 MouseMove, 0, 55, 1, R
