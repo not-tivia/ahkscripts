@@ -1,0 +1,23 @@
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+Numpad2::
+Loop, 27
+{
+Click
+RandomSleep(11000,13000)
+
+}
+return
+
+
+P::
+Suspend Permit
+keywait, p   ;<-- added
+Pause, Toggle
+Return
+
+esc::exitapp
