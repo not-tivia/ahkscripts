@@ -1,0 +1,205 @@
+MsgBox , , Info, Immediately after reading this draw a small square over your Rapid Heal spell by holding your left mouse button down until you get the box to the proper size and in the right position. The red square will most likely be off centered at first., 20
+#NoEnv
+CoordMode, Mouse ; Required: change coord mode to screen vs relative.
+LetUserSelectRect(x1, y1, x2, y2)
+
+
+
+
+Gui, Show , w500 h300, Silent's NMZ  
+;Script GUI Title;
+
+;GUI OPTIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;How Often do you want to click?;;;;;;;;;
+Gui, Add, Text, x20 y10 w160 Left,How often to check NMZ?
+Gui, Add, Text, x200 y10 w200 Left,Pick how often to click(In seconds.)
+Gui, Add, Text, x350 y30 w200 Left,Pick how often to click(minimum)?
+Gui, Add, Text, x350 y60 w200  Left,Pick how often to click(maxiumum)?
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;Countdown to the next click;;;;;;;;;;;;
+Gui, Add, Edit, x120 y30 h19 w40 vNUMBER Left, 
+Gui, Add, Edit, x300 y30 h19 w40 vNUMBER2 Left,
+Gui, Add, Edit, x300 y60 h19 w40 vNUMBER3 Left, 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;The Actual clickable button;;;;;;;;;;;;
+Gui, Add, Button, w80 h20 x20 y30 vMYBUTTON2 gCountdown ,Countdown
+Gui, Add, Button, x20 y80 w90 h20 vMYBUTTON3 gDOUBLE ,Restart
+Gui, Add, Button, x200 y30 w90 h20  vMYBUTTON gDOUBLE2 ,Start Clicks
+Gui, Add, Button, x200 y80 w90 h20  vMYBUTTON4 gPause ,Pause Script
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Gui, Add, Text, x20 y120 w250 Left,Press the Restart button if you were not able to draw the box around Rapid Heal spell.
+Gui, Add, Text, x20 y150 w250 Left,Press the Esc button to exit the program.
+Gui, Add, Text, x20 y180 w250 Left,Press the P button to Pause the script.
+Gui, Add, Text, x20 y210 w250 Left,Press the C button to Guzzle rockcakes.
+
+return
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;End of the GUI;;;;;;;;;;;;;;;;;
+
+
+
+Pause:
+Suspend Permit
+keywait, p 
+Pause, Toggle
+return
+
+
+
+Random(min,max) {
+	Random, out, %min%, %max%
+	return	out
+}
+
+DOUBLE:
+Reload
+Sleep 1000
+return
+;Copy and pasted draw rectangle function
+
+LetUserSelectRect(ByRef X1, ByRef Y1, ByRef X2, ByRef Y2)
+{
+
+    static r := 3
+    ; Create the "selection rectangle" GUIs (one for each edge).
+    Loop 4 {
+        Gui, %A_Index%: -Caption +ToolWindow +AlwaysOnTop
+        Gui, %A_Index%: Color, Red
+    }
+    ; Disable LButton.
+    Hotkey, *LButton, lusr_return, On
+    ; Wait for user to press LButton.
+    KeyWait, LButton, D
+    ; Get initial coordinates.
+    MouseGetPos, xorigin, yorigin
+    ; Set timer for updating the selection rectangle.
+    SetTimer, lusr_update, 10
+    ; Wait for user to release LButton.
+    KeyWait, LButton
+    ; Re-enable LButton.
+    Hotkey, *LButton, Off
+    ; Disable timer.
+    SetTimer, lusr_update, Off
+    ; Destroy "selection rectangle" GUIs.
+    Loop 4
+        Gui, %A_Index%: Destroy
+    return
+ 
+    lusr_update:
+        MouseGetPos, x, y
+        if (x = xlast && y = ylast)
+            ; Mouse hasn't moved so there's nothing to do.
+            return
+        if (x < xorigin)
+             x1 := x, x2 := xorigin
+        else x2 := x, x1 := xorigin
+        if (y < yorigin)
+             y1 := y, y2 := yorigin
+        else y2 := y, y1 := yorigin
+        ; Update the "selection rectangle".
+        Gui, 1:Show, % "NA X" x1 " Y" y1 " W" x2-x1 " H" r
+        Gui, 2:Show, % "NA X" x1 " Y" y2-r " W" x2-x1 " H" r
+        Gui, 3:Show, % "NA X" x1 " Y" y1 " W" r " H" y2-y1
+        Gui, 4:Show, % "NA X" x2-r " Y" y1 " W" r " H" y2-y1
+    lusr_return:
+    return
+}
+
+
+
+DOUBLE2:
+Gui, Submit, NoHide
+timeuntilnextclick2 := NUMBER2
+NUMBER2 = timeuntilnextclick2
+timeuntilnextclick3 := NUMBER3
+NUMBER3 = timeuntilnextclick3
+{
+RandomSleep(%NUMBER2%*1000,%NUMBER3%*1000)
+clickspotx := Random(x1,x2)
+clickspoty := Random(y1,y2)
+Click, %clickspotx%, %clickspoty%
+
+return
+}
+
+
+Countdown:
+	{
+		Gui, Submit, NoHide
+		numberofloops := NUMBER
+		Counter = %numberofloops%
+
+		Loop 50000
+		{
+			{
+				Counter -= 1
+				ToolTip, %Counter%
+				If (Counter = 2){
+				MsgBox , , CHECK NMZ, CHECK NMZ , 1
+				
+				}
+				RandomSleep(1000,1000)
+				If (Counter = 0){
+					numberofloops := NUMBER
+					Counter = %numberofloops%
+					;Counter := %numberofloops%
+					;break  ; this will break the loop
+					}
+				}
+			
+		
+		}	
+		return
+
+	}
+
+return
+
+
+
+
+
+
+
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+MoveMouse(X, Y, Speed=0) {
+   T := A_MouseDelay
+   SetMouseDelay, -1
+   MouseGetPos, CX, CY
+   Pts := Round(Sqrt((X - CX)**2 + (Y - CY)**2) / [color=red]30[/color],0)
+   Loop %Pts% {
+      Random, NX, % CX - ((CX - X) / Pts) * (A_Index - 1)
+                , % CX - ((CX - X) / Pts) * A_Index
+      Random, NY, % CY - ((CY - Y) / Pts) * (A_Index - 1)
+                , % CY - ((CY - Y) / Pts) * A_Index
+      MouseMove, % NX, % NY, % Speed
+   }
+   MouseMove, % X, % Y, % Speed
+   SetMouseDelay, % T
+}
+
+C::
+Click right
+MouseMove, 0, 35, 1, R
+Click
+MouseMove, 0, -35, 1, R
+return
+
+esc::exitapp
