@@ -1,19 +1,21 @@
-List = "Hello!", "Hello Again!"
+List := "Cor blimey mate what are ye doing in me pockets?", "Yum!", "Ow! I nearly broke a tooth!", "Aaah nothing like a nice cuppa tea!",
 
 
 StringSplit, element, List, `,
 
 
-~LButton Up::
+
+~LButton Up:: what are ye doing in me pockets?
 Random, RandomNum, 1, %element0%
 randomnumber := RandomNumb(0, 999)
+Send, % element%RandomNum% 
 MsgBox, 64, Random Name, % element%RandomNum% 
 Sleep, 3000 
-;Cor blimey mate, what are ye doing in me pockets?"
 
 
-;Send, {Enter Down}
-;Send, {Enter Up}
+
+Send, {Enter Down}
+Send, {Enter Up}
 return
 
 Ran(Num)
