@@ -1,0 +1,119 @@
+
+
+minute=380
+minute*=60
+x=0
+
+IfNotExist %A_WorkingDir%\yew.png
+{
+    SplashTextOn, 300, 30, !, Downloading images. Please wait...
+        ;URLDownloadToFile http://vignette1.wikia.nocookie.net/2007scape/images/c/cf/Oak_tree.png/revision/latest?cb=20150728151140, oak.png
+        ;URLDownloadToFile http://vignette1.wikia.nocookie.net/2007scape/images/1/19/Willow_tree.png/revision/latest?cb=20160610200558, willow.png
+        ;URLDownloadToFile http://vignette4.wikia.nocookie.net/2007scape/images/4/4b/Maple_tree.png/revision/latest?cb=20130601151958, maple.png
+	URLDownloadToFile http://vignette2.wikia.nocookie.net/2007scape/images/b/bd/Yew_tree.png/revision/latest?cb=20150728140526, yew.png
+	;URLDownloadToFile http://vignette3.wikia.nocookie.net/2007scape/images/6/64/Magic_tree.png/revision/latest?cb=20150728155829, magic.png
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;GreyScale;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	URLDownloadToFile https://i.imgur.com/I7CVTfN.png, yewgrey.png
+    SplashTextOff
+}
+
+
+Gui, Show, w300 h600, Silent Farmer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;How Often do you want to click?;;;;;;;;;
+Gui, Add, Text, x0 y0 w160 Left,  Trees
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Gui, Add, Picture, x0 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+Gui, Add, Picture, gToggle1 x0 y20 w50 h50, %A_WorkingDir%\yew.png
+
+gui,add,progress,vprogress
+gui,add,text,vtext x0 y80 w60 h60
+settimer,progress,1000 ;Change this to 100 if you want it to update the progress bar 10 times a secon
+
+;;;;;
+Gui, Add, Picture, gToggle2 x50 y20 w50 h50, %A_WorkingDir%\yew.png
+Gui, Add, Picture, x50 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+
+gui,add,progress,vprogress2
+gui,add,text,vtext2 x50 y80 w60 h60
+settimer,progress,1000 ;Change this to 100 if you want it to update the progress bar 10 times a secon
+;;
+Gui, Add, Picture, gToggle3 x100 y20 w50 h50, %A_WorkingDir%\yew.png
+Gui, Add, Picture, x100 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+
+Gui, Add, Picture, gToggle4 x150 y20 w50 h50, %A_WorkingDir%\yew.png
+Gui, Add, Picture, x150 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+
+Gui, Add, Picture, gToggle5 x200 y20 w50 h50, %A_WorkingDir%\yew.png
+Gui, Add, Picture, x200 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+return
+
+
+progress:
+x+=1
+percent:=(100*x)/minute ;Change this to 10 if you change the above number to 100
+guicontrol,,text,%percent% %x%
+;guicontrol,,progress,%percent%
+if percent=100
+{
+ msgbox DING!
+ settimer,progress,off
+}
+return
+
+Toggle1:
+Gui, Add, Picture, x0 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+sleep, 22800
+Gui, Add, Picture, x0 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+
+return
+
+Toggle2:
+sleep, 300
+Gui, Add, Picture, x50 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x50 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
+
+
+progress2:
+x+=1
+percent:=(100*x)/minute ;Change this to 10 if you change the above number to 100
+guicontrol,,text,%percent% %x%
+;guicontrol,,progress,%percent%
+if percent=100
+{
+ msgbox DING!
+ settimer,progress,off
+}
+return
+
+Toggle3:
+sleep, 300
+Gui, Add, Picture, x100 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x100 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
+
+Toggle4:
+sleep, 300
+Gui, Add, Picture, x150 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x150 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
+
+Toggle5:
+sleep, 300
+Gui, Add, Picture, x200 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x200 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
