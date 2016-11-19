@@ -1,0 +1,181 @@
+
+; simple input/output
+
+
+Gui, Show , w500 h500, Silent's ZWizard Curser
+
+
+; basic elements
+Gui, Add, Text, x20 y10 w90 Left,Cast Number?
+Gui, Add, Edit, w50 h19 x20 y30 vNUMBER Left, 
+;Gui, Add, Button, x100 y50 w90 h20 vMYBUTTON gDOUBLE ,1:1 Ratio
+Gui, Add, Button, x100 y30 w90 h20 vMYBUTTON2 gZammyCurser ,ZammyCurser
+;Gui, Add, Button, x100 y10 w90 h20 vMYBUTTON3 gToggler ,Pauser
+
+return
+
+
+P::
+Suspend Permit
+keywait, p   ;<-- added
+Pause, Toggle
+Return
+
+DOUBLE:
+	{
+		Gui, Submit, NoHide
+		double := NUMBER
+		msgbox,,Times to loop, Will loop %A_Index% more times or until stopped.
+		return
+	}
+
+
+ZammyCurser:
+	{
+		Gui, Submit, NoHide
+		numberofloops := NUMBER
+		ImageVariable := "C:\Users\Harbor\Desktop\ahkscripts\CurseImage.png"
+		Counter = %numberofloops%
+		Loop %numberofloops%
+		{
+			{
+				Counter -= 1
+				ToolTip, %Counter%
+				IfEqual, Counter, 1 
+				SoundPlay, C:\Users\Harbor\Desktop\ahkscripts\ding.mp3
+			}
+			{
+				ImageSearch, foundX, foundY, foundX2, foundY2, %A_ScreenWidth%, %A_ScreenHeight%, C:\Users\Harbor\Desktop\CurseImage.png
+				If(ErrorLevel == 0)
+				{
+					offset=6
+					offsetX := foundX+Ran(offset),foundY2+Ran(offset) 
+					offsetY := foundY+Ran(offset), foundX+Ran(offset) 
+					Click, %offsetX%, %offsetY%
+				}
+			else
+				{
+					MsgBox, Image not found.  Script will now exit.
+					ExitApp
+				}	
+				Mousemove,-395, -111, 0, R
+				RandomSleep(600,1000)
+				Click
+				RandomSleep(300,800)
+			}
+		}	
+		
+
+	}
+
+
+
+
+
+
+
+
+; GuiClose: 
+; ExitApp
+
+
+
+
+
+Numpad1::
+
+ImageSearch, foundX, foundY, foundX2, foundY2, %A_ScreenWidth%, %A_ScreenHeight%, C:\Users\Harbor\Desktop\CurseImage.png
+If(ErrorLevel == 0){
+offset=10
+offsetX := foundX+Ran(offset),foundY2+Ran(offset) 
+offsetY := foundY+Ran(offset), foundX+Ran(offset) 
+Click, %offsetX%, %offsetY%
+}else{
+MsgBox, Image not found.
+}
+return
+
+
+Numpad3::
+{
+Mousemove,-395, -111, 0, R
+RandomSleep(600,1000)
+
+
+Click
+RandomSleep(300,800)
+
+}
+return
+return
+Numpad2::
+While GetKeyState("Numpad2", "D")
+{
+Mousemove,395, 111, 0, R
+RandomSleep(600,1000)
+
+Click
+RandomSleep(300,800)
+
+
+Mousemove,-395, -111, 0, R
+RandomSleep(600,1000)
+
+
+Click
+RandomSleep(300,800)
+
+}
+return
+
+
+
+
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+MoveMouse(X, Y, Speed=0) {
+   T := A_MouseDelay
+   SetMouseDelay, -1
+   MouseGetPos, CX, CY
+   Pts := Round(Sqrt((X - CX)**2 + (Y - CY)**2) / [color=red]30[/color],0)
+   Loop %Pts% {
+      Random, NX, % CX - ((CX - X) / Pts) * (A_Index - 1)
+                , % CX - ((CX - X) / Pts) * A_Index
+      Random, NY, % CY - ((CY - Y) / Pts) * (A_Index - 1)
+                , % CY - ((CY - Y) / Pts) * A_Index
+      MouseMove, % NX, % NY, % Speed
+   }
+   MouseMove, % X, % Y, % Speed
+   SetMouseDelay, % T
+}
+
+
+
+MonkCurserLoop:
+ImageSearch, foundX, foundY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, C:\Users\Harbor\Desktop\CurseImage.png
+If(ErrorLevel == 0){
+Click, %foundX%, %foundY%
+}else{
+MsgBox, Image not found.
+}
+{
+Mousemove,-395, -111, 0, R
+RandomSleep(600,1000)
+
+Click
+RandomSleep(300,800)
+}
+return
+
+esc::exitapp
