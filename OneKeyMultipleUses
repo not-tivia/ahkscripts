@@ -1,0 +1,100 @@
+;Here is an example of using the same key multiple times with different actions
+
+~Numpad1::
+KeyCount += 1
+If(KeyCount == 1){
+Mousemove,0, 25, 0, R
+
+}
+If(KeyCount == 2){
+Mousemove,0, 35, 0, R
+
+}
+If(KeyCount == 3){
+Mousemove,0, 45, 0, R
+}
+If(KeyCount == 4){
+
+}
+If(KeyCount == 5){
+
+}
+If(KeyCount == 6){
+
+}
+If(KeyCount == 7){
+
+}If(KeyCount == 8){
+
+}
+If(KeyCount == 9){
+
+}
+If(KeyCount == 10){
+
+}If(KeyCount == 11){
+
+}
+If(KeyCount == 12){
+
+}
+If(KeyCount == 13){
+
+}If(KeyCount == 14){
+
+}
+If(KeyCount == 15){
+
+}
+If(KeyCount == 16){
+
+}If(KeyCount == 17){
+
+}
+If(KeyCount == 18){
+
+}
+If(KeyCount == 19){
+
+}If(KeyCount == 20){
+
+}
+If(KeyCount == 21){
+
+}
+If(KeyCount == 22){
+
+}If(KeyCount == 23){
+
+}
+If(KeyCount == 24){
+
+}
+If(KeyCount == 25){
+
+}If(KeyCount == 26){
+
+}
+If(KeyCount == 27){
+
+}
+Return
+
+;Ctrl+S to show click count #
+^s::MsgBox, Count: %KeyCount%
+Return
+
+
+~Numpad0::
+KeyCount *=0
+return
+
+Numpad2::
+Click
+return
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
