@@ -2,7 +2,7 @@ Numpad1::
 While GetKeyState("Numpad1", "D")
 {
 Click
-RandomSleep(400,700)
+RandomSleep(317,700)
 }
 return
 
