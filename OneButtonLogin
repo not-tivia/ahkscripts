@@ -1,0 +1,50 @@
+
+
+;Confirming that you want to login;
+username := "PutYourUsernameHere"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Actual Account Information;;;;
+login := "PutYourUsernameHere"
+password := "PutYourPasswordHere"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;DONT TOUCH ANYTHING UNDER HERE;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Gui, Show , w200 h200, QuickLogin
+Gui, Add, Button, x25 y25 w150 h150 vMYBUTTON gQuickLogin ,LOGIN WITHOUT KEYBOARD
+
+QuickLogin:
+Gui, Submit, NoHide
+Loop
+{
+MsgBox, 4, , The account you wish to login to is %username%.  Continue?
+    if ErrorLevel
+        break
+    IfMsgBox, No 
+return
+    MsgBox, Your informationw ill be sent in 10 seconds. Please Press on the runescape login button.
+     Sleep 10000
+   send %login%
+   send {Enter}
+   send %password%
+        
+return
+}
+
+
+
