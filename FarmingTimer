@@ -5,7 +5,7 @@
 
 SplashTextOn, 300, 30, !, Downloading Newest Version. Please wait...
 UrlDownloadToFile, https://raw.githubusercontent.com/bolsilent/ahkscripts/master/FarmingTimer, FarmingTimer.ahk
-
+SplashTextOff
 
 IfNotExist %A_WorkingDir%\CamelotGrow.png
 {
