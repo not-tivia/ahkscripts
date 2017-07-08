@@ -1,1 +1,122 @@
-placeholder for auto downlaoder.
+;Canifis, Camalot, Faladore, Ardougne, Hosidius(Zeah), herb farming patches timer.
+
+
+#MaxThreadsPerHotkey 2
+
+;UrlDownloadToFile, URL, Filename
+
+
+IfNotExist %A_WorkingDir%\CamelotGrow.png
+{
+    SplashTextOn, 300, 30, !, Downloading images. Please wait...
+        ;URLDownloadToFile https://vignette2.wikia.nocookie.net/2007scape/images/2/24/Kharyrll_teleport_detail.png/revision/latest/scale-to-width-down/130?cb=20160512195911, Canifis.png
+        ;URLDownloadToFile https://vignette1.wikia.nocookie.net/2007scape/images/4/4e/Falador_teleport_detail.png/revision/latest/scale-to-width-down/130?cb=20160512195910, Falador.png
+        ;URLDownloadToFile https://vignette4.wikia.nocookie.net/2007scape/images/3/32/Camelot_teleport_detail.png/revision/latest/scale-to-width-down/130?cb=20160512195908, Camelot.png
+	;URLDownloadToFile https://vignette4.wikia.nocookie.net/2007scape/images/a/a1/Ardougne_teleport_detail.png/revision/latest/scale-to-width-down/130?cb=20160512195907, Ardougne.png
+	;URLDownloadToFile https://vignette2.wikia.nocookie.net/2007scape/images/c/cc/Hosidius_House_symbol.png/revision/latest/scale-to-width-down/120?cb=20160106225242, Hosidius.png
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;GreyScale;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	URLDownloadToFile http://i.imgur.com/y3jn1Mk.png?1, CamelotGrey.png
+        URLDownloadToFile http://i.imgur.com/Wg76Y0Z.png?1, FaladorGrey.png
+        URLDownloadToFile http://i.imgur.com/3YXasZx.png?1, CanifisGrey.png
+        URLDownloadToFile http://i.imgur.com/RqRrlDV.png?1, ArdougneGrey.png
+        URLDownloadToFile http://i.imgur.com/xbY1FYv.png?1, HosidiusGrey.png
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;Growing;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	URLDownloadToFile http://i.imgur.com/zbjrsn0.png?1, CamelotGrow.png
+        URLDownloadToFile http://i.imgur.com/wBAIAF7.png?2, FaladorGrow.png
+        URLDownloadToFile http://i.imgur.com/WosTtp3.png?1, CanifisGrow.png
+        URLDownloadToFile http://i.imgur.com/PBwVbAR.png?1, ArdougneGrow.png
+        URLDownloadToFile http://i.imgur.com/MjYUqrC.png?1, HosidiusGrow.png
+
+    SplashTextOff
+}
+
+
+Gui, Show, w300 h600, Farmering Tracker
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;How Often do you want to click?;;;;;;;;;
+Gui, Add, Text, x0 y0 w300 Left,     Canifis, Camelot, Falador, Ardy, Zeah farming spots
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Gui, Add, Picture, x0 y20 w50 h50, %A_WorkingDir%\CanifisGrey.png
+Gui, Add, Picture, gToggle1 x0 y20 w50 h50, %A_WorkingDir%\CanifisGrow.png
+
+
+;;;;;
+Gui, Add, Picture, gToggle2 x50 y20 w50 h50, %A_WorkingDir%\CamelotGrey.png
+Gui, Add, Picture, x50 y20 w50 h50, %A_WorkingDir%\CamelotGrow.png
+
+;;
+Gui, Add, Picture, gToggle3 x100 y20 w50 h50, %A_WorkingDir%\FaladorGrey.png
+Gui, Add, Picture, x100 y20 w50 h50, %A_WorkingDir%\FaladorGrow.png
+
+Gui, Add, Picture, gToggle4 x150 y20 w50 h50, %A_WorkingDir%\ArdougneGrey.png
+Gui, Add, Picture, x150 y20 w50 h50, %A_WorkingDir%\ArdougneGrow.png
+
+Gui, Add, Picture, gToggle5 x200 y20 w50 h50, %A_WorkingDir%\HosidiusGrey.png
+Gui, Add, Picture, x200 y20 w50 h50, %A_WorkingDir%\HosidiusGrow.png
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+return
+
+
+
+Toggle1:
+
+Gui, Add, Picture, x0 y20 w50 h50, %A_WorkingDir%\CanifisGrow.png
+sleep, 4500
+SoundBeep, ,500
+sleep, 500
+SoundBeep, ,500
+Gui, Add, Picture, x0 y100 w50 h50, %A_WorkingDir%\Canifis.png
+Gui, Add, Text, x0 y85 w50 left, READY
+sleep, 500
+Msgbox, Your Canifis herb patch is ready to be harvested. 
+
+return
+
+
+
+
+
+sleep, 300
+
+return
+
+Toggle2:
+sleep, 300
+Gui, Add, Picture, x50 y20 w50 h50, %A_WorkingDir%\CamelotGow.png
+sleep, 4500000
+Msgbox, Your Camelot herb patch is ready to be harvested. 
+
+return
+
+
+
+
+Toggle3:
+sleep, 300
+Gui, Add, Picture, x100 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x100 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
+
+Toggle4:
+sleep, 300
+Gui, Add, Picture, x150 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x150 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
+
+Toggle5:
+sleep, 300
+Gui, Add, Picture, x200 y20 w50 h50, %A_WorkingDir%\yew.png
+sleep, 300
+Gui, Add, Picture, x200 y20 w50 h50, %A_WorkingDir%\yewgrey.png
+return
