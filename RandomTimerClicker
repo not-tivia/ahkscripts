@@ -1,0 +1,81 @@
+#NoEnv
+
+Gui, Show , w300 h200, Random Sleep GUI 
+;Script GUI Title;
+;GUI OPTIONS
+Gui, Add, Text, x20 y10 w240 Left,Minimum sleep in milliseconds?
+Gui, Add, Text, x20 y60 w240 Left,Maximum sleep in milliseconds?
+;;;;;;;;Countdown to the next click;;;;;;;;;;;;
+Gui, Add, Edit, x120 y30 h19 w40 vNUMBER Left,
+Gui, Add, Edit, x120 y80 h19 w40 vNUMBER2 Left,  
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;The Actual clickable button;;;;;;;;;;;;
+Gui, Add, Button, w80 h20 x20 y30 vMYBUTTON2 gStart ,Start!
+
+
+Gui, Add, Text, x20 y150 w250 Left,Press the Esc button to exit the program.
+Gui, Add, Text, x20 y180 w250 Left,Press the P button to Pause the script.
+
+return
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;End of the GUI;;;;;;;;;;;;;;;;;
+
+
+
+Start:
+    {
+        Gui, Submit, NoHide
+        basenumber := NUMBER
+        Base = %basenumber%
+
+        Secondnumber := NUMBER2
+        RandomN = %Secondnumber%
+
+
+
+
+    }   
+
+return
+
+Z::
+Loop 
+
+        {
+        Random, RandomSleepTimeSetByYou, %basenumber%, %Secondnumber% 
+Sleep, %RandomSleepTimeSetByYou%
+Click
+ Sleep, %RandomSleepTimeSetByYou%
+        }
+
+return
+
+P::
+Suspend Permit
+keywait, p 
+Pause, Toggle
+return
+
+
+
+Random(min,max) {
+    Random, out, %min%, %max%
+    return  out
+}
+
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+esc::exitapp
