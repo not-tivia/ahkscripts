@@ -1,0 +1,211 @@
+;;;;; Auto Clicker that allows you to set the time between clicks, a random chance to sleep every every click,
+;;;;; two seperate locations,and how often to click the second location [ to start the script ] to pause the script
+;;;;; Press z with the mouse over cordinate one and x with the mouse over cordinate two
+;;;;; esc button to end the AHK script.
+
+
+
+
+#NoEnv
+CoordMode, Mouse ; Required: change coord mode to screen vs relative.
+
+
+Gui, Show , w300 h300, Random Sleep GUI 
+;Script GUI Title;
+;GUI OPTIONS
+Gui, Add, Text, x20 y10 w240 Left,Click every Min to Max in milliseconds
+Gui, Add, Text, x165 y35 w240 Left, to
+
+
+Gui, Add, Text, x20 y65 w100 Left, Randomly sleep for
+Gui, Add, Text, x165 y65 w240 Left, to
+
+
+Gui, Add, Text, x20 y90 w100 Left, Chance to sleep
+
+Gui, Add, Text, x20 y120 w100 Left, Click 2nd loc every
+Gui, Add, Text, x165 y120 w280 Left, clicks
+
+
+
+
+;;;;;;;;Countdown to the next click;;;;;;;;;;;;
+Gui, Add, Edit, x120 y30 h19 w40 vNUMBER Left,
+Gui, Add, Edit, x180 y30 h19 w40 vNUMBER2 Left,  
+
+Gui, Add, Edit, x120 y60 h19 w40 vNUMBER3 Left,
+Gui, Add, Edit, x180 y60 h19 w40 vNUMBER4 Left,  
+
+Gui, Add, Edit, x120 y90 h19 w40 vNUMBER5 Left,  
+
+Gui, Add, Edit, x120 y120 h19 w40 vNUMBER6 Left,
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;The Actual clickable button;;;;;;;;;;;;
+Gui, Add, Button, w80 h20 x20 y30 vMYBUTTON2 gStart ,SAVE
+
+Gui, Add, Text, x20 y150 w250 Left, Press [ to start, ] to pause.
+Gui, Add, Text, x20 y180 w250 Left, Z for location 1, X for location two.
+Gui, Add, Text, x20 y210 w250 Left, Press the Esc button to exit the program.
+Gui, Add, Text, x20 y230 w250 Left, Made by Tivia#5267
+
+
+return
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;End of the GUI;;;;;;;;;;;;;;;;;
+
+
+
+Start:
+    {
+        Gui, Submit, NoHide
+        basenumber := NUMBER
+        Base = %basenumber%
+
+        Secondnumber := NUMBER2
+        RandomN = %Secondnumber%
+
+	Thirdnumber := NUMBER3
+	number3 = %Thirdnumber%
+
+	Fourthnumber := NUMBER4
+	number4 = %Fourthnumber%
+
+
+	Probability := NUMBER5 
+	prob = %Probability%
+
+	SixthValue := NUMBER6
+	key = %SixthValue%
+	
+    }   
+
+return
+
+[::
+Loop,{
+Random, Var, 0, 100
+Random, key, key-2, key+2
+
+
+if (KeyCount >= key)
+gosub, KeyVarClick
+
+if (var <= NUMBER5)
+
+;MsgBox, Less %var% is less than or equal to %NUMBER5%
+	gosub, NormalSleep
+else if (var > NUMBER5)
+	gosub, NormalClick
+
+
+}
+return
+
+
+KeyVarClick:
+RandomSleep(432,817)
+offset2=2
+offsetX2 := StartX2+Ran(offset2), StartY2+Ran(offset2) 
+offsetY2 := StartY2+Ran(offset2), StartX2+Ran(offset2) 
+MoveMouse(offsetX2, offsetY2, Speed=100)
+RandomSleep(432,817)
+Click
+RandomSleep(432,817)
+offset1=2
+offsetX1 := StartX1+Ran(offset1), StartY1+Ran(offset1) 
+offsetY1 := StartY1+Ran(offset1), StartX1+Ran(offset1) 
+MoveMouse(StartX1, StartY1, Speed=100)
+RandomSleep(432,817)
+Click
+RandomSleep(432,817)
+KeyCount = 0
+Random, key, key-2, key+2
+return
+
+
+Z::
+MouseGetPos, StartX1, StartY1
+return
+
+X::
+MouseGetPos, StartX2, StartY2
+return
+
+
+NumpadEnter::
+KeyCount *=0
+return
+
+
+MoveMouse(X, Y, Speed=0) {
+   T := A_MouseDelay
+   SetMouseDelay, -1
+   MouseGetPos, CX, CY
+   Pts := Round(Sqrt((X - CX)**2 + (Y - CY)**2) / [color=red]30[/color],0)
+   Loop %Pts% {
+      Random, NX, % CX - ((CX - X) / Pts) * (A_Index - 1)
+                , % CX - ((CX - X) / Pts) * A_Index
+      Random, NY, % CY - ((CY - Y) / Pts) * (A_Index - 1)
+                , % CY - ((CY - Y) / Pts) * A_Index
+      MouseMove, % NX, % NY, % Speed
+   }
+   MouseMove, % X, % Y, % Speed
+   SetMouseDelay, % T
+}
+
+
+NormalClick:
+        {
+        Random, RandomSleepTimeSetByYou, %basenumber%, %Secondnumber% 
+Sleep, %RandomSleepTimeSetByYou%
+;;MoveMouse (StartX1, StartY1, 100)
+
+Click
+KeyCount += 1
+;MsgBox, Clicked
+ ;Sleep, %RandomSleepTimeSetByYou%
+        }
+
+return
+
+
+NormalSleep:
+{
+ Random, RandomSleepTimeSetByYou, %Thirdnumber%, %Fourthnumber%
+;MsgBox, Sleeping for %RandomSleepTimeSetByYou%
+Sleep, %RandomSleepTimeSetByYou%
+
+}
+return
+
+
+]::
+Suspend Permit
+keywait, p 
+Pause, Toggle
+return
+
+
+
+Random(min,max) {
+    Random, out, %min%, %max%
+    return  out
+}
+
+
+Ran(Num)
+{
+   Random, r, -1*Num, Num
+   Return r
+}
+
+RandomSleep(min,max)
+{
+Random, random, %min%, %max%
+Sleep %random%
+}
+
+esc::exitapp
