@@ -47,7 +47,7 @@ Loop
         Random, RandomSleepTimeSetByYou, %basenumber%, %Secondnumber% 
 Sleep, %RandomSleepTimeSetByYou%
 Click
- Sleep, %RandomSleepTimeSetByYou%
+
         }
 
 return
