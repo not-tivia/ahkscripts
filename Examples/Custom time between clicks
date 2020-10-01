@@ -1,6 +1,6 @@
 #NoEnv
 
-Gui, Show , w300 h200, Silent's Random Sleep GUI 
+Gui, Show , w300 h200,  Random Sleep GUI 
 ;Script GUI Title;
 ;GUI OPTIONS
 Gui, Add, Text, x20 y10 w240 Left,Minimum sleep in milliseconds?

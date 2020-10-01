@@ -1,8 +1,11 @@
 
 ; simple input/output
+;Simple example of looping until x actions has been completed
+;Picture searching and increasing count each loop
+;Playing mp3 soiunds and image searching
+;MsgBox and ends if no image is found
 
-
-Gui, Show , w500 h500, Silent's ZWizard Curser
+Gui, Show , w500 h500, ZWizard Curser
 
 
 ; basic elements

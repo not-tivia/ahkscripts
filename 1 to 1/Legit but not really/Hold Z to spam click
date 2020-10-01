@@ -1,5 +1,5 @@
-Numpad1::
-While GetKeyState("Numpad1", "D")
+z::
+While GetKeyState("z", "D")
 {
 Click
 RandomSleep(317,700)

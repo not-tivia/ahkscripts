@@ -5,7 +5,7 @@ Sleep %random%
 }
 
 
-Numpad1::
+z::
 Click right
 RandomSleep(200,450)
 Mousemove,0,55,0,R
